@@ -1,0 +1,32 @@
+Designing Resilient Microservices with EQSM: A Practical Guide
+
+Introduction:
+In a product-focused organization that leverage microservices architecture, it is crucial to have effective mechanisms to manage and find the current state of their systems. This article introduces a design pattern that we have developed for managing the state of a system using a combination of event sourcing, state machines, and CQRS patterns. We call this pattern the "Event-Sourced Queryable State Machine" (EQSM), and it provides a robust framework for efficiently managing and querying the state of a system. 
+
+Understanding the EQSM Pattern:
+
+The ESQSM pattern brings together three fundamental design concepts: event sourcing, state machines, and CQRS. Let's take a closer look at each of these concepts:
+1. Event Sourcing:
+    * Event sourcing captures every state change in the system as an event, forming an immutable log of events over time. By storing and replaying events, the system's current state can be reconstructed at any point in time. This approach provides a complete audit trail of actions and facilitates easy debugging, historical analysis, and compliance requirements.
+2. State Machines:
+    * State machines are a modeling technique that is widely used to represent system states and transitions. They offer a structured and visual approach for defining complex systems' behaviors. The state machine approach enables a clear understanding of the possible system states and their transitions, ensuring consistency and integrity of the system's behavior. Additionally, time-based expectations can be set for state transitions to achieve process Service Level Agreements (SLAs).
+3. CQRS (Command Query Responsibility Segregation):
+    * CQRS separates the command (write) and query (read) responsibilities of an application. It introduces dedicated paths for commands that modify the state of the system and queries that retrieve the current state. This segregation optimizes performance, scalability, and allows tailored optimization strategies for each type of operation.
+
+Applying EQSM:
+
+This is just a simplified example of how EQSM can be used in an e-commerce application. The specific steps involved will vary depending on the specific application.
+
+When a customer places an order, an event is triggered that captures the order details and is stored as an immutable event in the event store. The state machine then updates the state of the order to "pending". As the order moves through the fulfillment process, different events are triggered, such as the items being picked and packed, and the order being shipped.
+
+Each of these events is stored in the event store and the state machine updates the state of the order accordingly. For example, when the items are picked and packed, the state of the order is updated to "ready for shipment". When the order is shipped, the state of the order is updated to "shipped".
+
+Using CQRS, we can query the current state of the order at any time. This allows the customer to see the status of their order, such as whether it has been shipped or is still pending. It also allows the store to track the progress of the order and identify any bottlenecks in the fulfillment process.
+
+Implementing EQSM:
+We utilized Camunda, Springboot, and Kafka to implement EQSM. Camunda's support for state machines streamlined the modeling and execution of state transitions, decreasing development time and reducing the chance of errors. Additionally, we integrated event handling into the application, defined our business process as a state machine, and leveraged command and state change events to update the state machine. The state machine also emitted events that were stored in a database, enabling the state to be queried.
+
+AWS State Machine can be used in place of Camunda to implement Event-Driven State Machine with CQRS pattern. AWS State Machine is a fully managed service that makes it easy to coordinate and automate long-running, event-driven workflows. 
+
+Conclusion:
+The Event-Sourced Queryable State Machine (EQSM) pattern combines event sourcing, state machines, and CQRS to manage and query microservice state effectively. It ensures consistency, provides an audit trail, and enables tailored optimizations. Implementing EQSM involves using Camunda, Springboot, and Kafka to streamline state transitions, while AWS State Machine offers a managed service alternative. EQSM is a valuable design pattern for resilient microservices in modern architectures, simplifying development and enhancing system reliability.
