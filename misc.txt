@@ -1,1 +1,14 @@
 
+To further illustrate the practical application of the Event-Sourced Queryable State Machine (EQSM) pattern, let's consider an example from the e-commerce domain: the order fulfillment process. This example will showcase how EQSM can provide visibility into the current state of the process and handle scenarios involving delays.
+
+When a customer places an order, an event is triggered, capturing the order details and storing it as an immutable event in the event store. The state machine, representing the order fulfillment process, updates the state of the order to "Pending". As the order progresses through various stages, such as "ItemsPickedAndPacked" and "OrderShipped", corresponding events are triggered, and the state machine updates the order's state accordingly.
+
+Now, let's introduce a scenario where there is a delay in the "ItemsPickedAndPacked" stage. This delay could be caused by various factors, such as inventory shortage or logistical issues. With EQSM, we can incorporate Service Level Agreement (SLA) tracking to monitor the time taken for state transitions.
+
+In this case, let's assume that the SLA for the "ItemsPickedAndPacked" stage is set to 24 hours. When the delay surpasses this SLA, EQSM can automatically trigger an event, such as "ProcessDelayed" or "DelayAlert". This event will be published and can be utilized to notify relevant stakeholders about the delay.
+
+The stakeholders can include customer support representatives, managers, or even the customer themselves. By receiving timely notifications about the delay, customer support representatives can proactively reach out to the customer, providing updates and managing expectations. Managers can leverage the event-driven data to identify bottlenecks in the process and take necessary actions, such as reallocating resources or expediting the fulfillment.
+
+The SLA tracking capability of EQSM, combined with event publication and real-time visibility, ensures that stakeholders are promptly informed about any delays or issues in the order fulfillment process. This promotes effective communication, collaboration, and proactive problem-solving, contributing to a resilient and customer-centric operation.
+
+In summary, the EQSM pattern empowers businesses to monitor and manage complex business processes effectively. By incorporating SLA tracking and event publication capabilities, EQSM provides stakeholders with real-time visibility into the current state of the process, enabling them to address delays or issues promptly and deliver exceptional customer experiences.
